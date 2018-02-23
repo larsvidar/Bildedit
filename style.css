@@ -1,0 +1,361 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	z-index: 1;
+}
+
+body {
+	text-align: center;
+	color: white;
+	background-color: #888;
+	font-size: 1em;
+	overflow: hidden;
+}
+
+/*
+img {
+	visibility: hidden;
+}
+*/
+
+#backdrop {
+	background-color: #888
+}
+
+header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	padding: 10px;
+	background-color: #666;
+	border-bottom: solid 1px #000;
+	z-index: 10;
+}
+
+header h1, header h4 {
+	display: inline-block;
+}
+
+h1 {
+	font-size: 16px;
+}
+
+h4 {
+	font-size: 14px;
+}
+
+
+/********** MENU **********/
+#menu {
+	position: fixed;
+	top: 39px;
+	width: 100%;
+	background-color: #777;
+	box-shadow: 2px 2px 3px #000;
+	text-align: left;
+	z-index: 10;
+}
+
+#menu li {
+	display: inline-block;
+	padding: 8px 50px 3px 20px;
+	font-size: 12px;
+}
+
+.menuline {
+	display: none;
+	position: absolute;
+	top: 25px;
+	left: 1px;
+	background-color: #777;
+	border: solid 1px #555;
+}
+
+.menuitems {
+	width: 125px;
+}
+
+.menuitems:hover {
+	background-color: #666;
+}
+
+.menuline li {
+	display: block;
+}
+
+/*---File---*/
+#file2 li {
+	text-align: left;
+	padding: 10px 5px 10px 20px;
+}
+
+#file-menu {
+	position: relative;
+}
+
+#file-menu:hover #file2 {
+	display: block;
+}
+
+#file-menu:hover {
+	background-color: #666;
+}
+
+
+/*---Adjustment---*/
+
+#adjustment li {
+	text-align: left;
+	padding: 10px 5px 10px 20px;
+}
+
+#adjustment-menu {
+	position: relative;
+}
+
+#adjustment-menu:hover #adjustment {
+	display: block;
+}
+
+#adjustment-menu:hover {
+	background-color: #666;
+}
+
+/*---Filters---*/
+
+#filters li {
+	text-align: left;
+	padding: 10px 5px 10px 20px;
+}
+
+#filters-menu {
+	position: relative;
+}
+
+#filters-menu:hover #filters {
+	display: block;
+}
+
+#filters-menu:hover {
+	background-color: #666;
+}
+
+/*---Help---*/
+
+#help li {
+	text-align: left;
+	padding: 10px 5px 10px 20px;
+}
+
+#help-menu {
+	position: relative;
+}
+
+#help-menu:hover #help {
+	display: block;
+}
+
+#help-menu:hover {
+	background-color: #666;
+}
+
+
+
+/********** DIALOG BOXES **********/
+
+.box-description {
+	padding-bottom: 10px;
+	font-style: italic;
+}
+
+.dialog {
+	display: none;
+	position: absolute;
+	padding: 15px;
+	background-color: #777;
+	border: solid 3px #666;
+	border-radius: 20px;
+	width: 200px;
+	height: 150px;
+	top: 60%;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.dialog h2 {
+	margin: -8px 0 10px;
+}
+
+.dialog-ok {
+	margin: 5px;
+	padding: 5px 15px;
+}
+
+/*----- Brightness dialog -----*/
+
+#brightness-dialog {
+	height: 180px;
+}
+
+
+/*----- Blur dialog -----*/
+
+
+/*----- Black and White dialog -----*/
+
+#bw-dialog {
+	width: 210px;
+}
+
+/*----- Saturation dialog -----*/
+
+#saturate-dialog {
+	height: 180px;
+}
+
+/*----- Saturation dialog -----*/
+
+#invert-dialog {
+	height: 200px;
+}
+
+
+.button {
+	font-size: 20px;
+	margin: 20px;
+	padding: 5px;
+}
+
+.slider {
+	margin: 0 auto;
+	background-color: #333;
+	width: 150px;
+}
+
+.ui-slider-handle {
+	background-color: green;
+}
+
+
+.checkbox input {
+	display:none;
+}
+
+.toggle {
+	position: relative;
+	display: block;
+	width: 60px;
+	height: 34px;
+	margin: 5px auto 15px;
+}
+
+.switch {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	-webkit-transition: .2s;
+	transition: .2s;	
+	border-radius: 34px;
+}
+
+.switch:before {
+	position: absolute;
+	content: "";
+	height: 26px;
+	width: 26px;
+	left: 4px;
+	bottom: 4px;
+	background-color: white;
+	-webkit-transition: .2s;
+	transition: .2s;
+	border-radius: 50%;
+}
+
+input:checked + .switch {
+  background-color: #2196F3;
+}
+
+input:focus + .switch {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .switch:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+
+
+
+
+/**** Image area ***/
+
+section {
+	display: flex;
+	justify-content: center;
+	position: absolute;
+	top: 67px;
+	left: 0;
+	max-height: calc(100vh - 97px);
+	max-width: 100%;
+	min-width: 100px;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+section p {
+	margin: 0 0 20px 0;
+	height: 100%;
+}
+
+#image-box {
+	display: flex;
+	align-self: center;
+	border: solid 1px black;
+	overflow: hidden;
+}
+
+#loaded-image {
+	object-fit: contain;
+}
+
+
+
+
+
+
+
+
+
+
+.Absolute-Center {
+
+}
+
+
+footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	padding: 5px;
+	bottom: 0;
+	width: 100%;
+	text-align: left;
+	background-color: #777;
+	box-shadow: -2px -2px 3px #000;
+}
+
+#file {
+	width: 0px;
+	height: 0px;
+	visibility: hidden;
+}

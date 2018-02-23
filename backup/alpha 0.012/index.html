@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>BildEdit</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link href="style.css" type="text/css" rel="stylesheet">
+	</head>
+	<body>
+		<div id="backdrop">
+			<header>
+				<h1>BildEdit</h1>
+				<h4> - a free photo editor</h4>
+			</header>
+			
+			<!--- MENU --->
+			<div id="menu">
+				<ul>
+				
+					<!--- File menu --->
+					<li id="file-menu">
+						<p>File<p>
+						<div id="file2" class="menuline">
+							<ul>
+								<label for="file"><li id="loadfile" class="menuitems">Load file</li></label>
+								<li id="savefile" class="menuitems">Save file</li>
+								<li id="closefile" class="menuitems">Close file</li>
+							</ul>
+						</div><!---#file--->
+					</li>
+					
+					<!--- Adjustment menu --->
+					<li id="adjustment-menu">
+						<p>Adjustment</p>
+						<div id="adjustment" class="menuline">
+							<ul>
+								<li id="brightness" class="menuitems">Brightness</li>
+								<li id="contrast" class="menuitems">Contrast</li>
+								<li id="saturate" class="menuitems">Saturation</li>
+								<li id="hue" class="menuitems">Hue</li>
+							</ul>
+						</div><!---#adjustment--->
+					</li>					
+					
+					<!--- Filters menu --->
+					<li id="filters-menu">
+						<p>Filters</p>
+						<div id="filters" class="menuline">
+							<ul>
+								<li id="blur" class="menuitems">Blur</li>
+								<li id="blackwhite" class="menuitems">Black and White</li>
+								<li id="sepia" class="menuitems">Sepia</li>
+								<li id="invert" class="menuitems">Invert</li>
+							</ul>
+						</div><!---#filters--->
+					</li>
+					
+					<!--- Help menu --->
+					<li id="help-menu">
+						<p>Help</p>
+						<div id="help" class="menuline">
+							<ul>
+								<li id="about" class="menuitems">About</li>
+							</ul>
+						</div><!---##help-menu--->
+					</li>
+					
+				</ul>
+			</div><!--#menu-->
+			
+			
+			<!--- Image Editing Area --->
+			<section>
+				<!--canvas id="canvas" width="800" height="600"></canvas-->
+				<div id="image-box">
+					<img id="loaded-image">
+				</div><!---#image-box--->
+			</section>
+			
+			
+			<!----- Footer ----->
+			<footer>
+				<p id="filename">No file loaded<p>
+			</footer>
+		</div><!----#backdrop--->
+		<input type="file" id="file" /><!-- Hidden input for file dialog -->
+		
+		
+		<!--****************** Adjustments ******************-->
+		<!----- BRIGHTNESS DIALOG BOX ----->
+		<div id="brightness-dialog" class="dialog">
+			<h2>Brightness</h2>
+			<p class="box-description">Make image lighter or darker</p>
+			<div id="brightness-slider" class="slider"></div>
+				<p class="note">Current value: <span id="brightnessValue">100</span></p>
+				<button id="brightness-ok" class="dialog-ok">Ok</button>
+		</div><!--#saturate-dialog-->
+		
+		<!----- CONTRAST DIALOG BOX ----->
+		<div id="contrast-dialog" class="dialog">
+			<h2>Contrast</h2>
+			<p class="box-description">Add or remove contrast</p>
+			<div id="contrast-slider" class="slider"></div>
+				<p class="note">Current value: <span id="contrastValue">100</span></p>
+				<button id="contrast-ok" class="dialog-ok">Ok</button>
+		</div><!--#contrast-dialog-->
+		
+		<!----- SATURATION DIALOG BOX ----->
+		<div id="saturate-dialog" class="dialog">
+			<h2>Saturation</h2>
+			<p class="box-description">Make image more or less saturated</p>
+			<div id="saturate-slider" class="slider"></div>
+				<p class="note">Current value: <span id="saturateValue">0</span></p>
+				<button id="saturate-ok" class="dialog-ok">Ok</button>
+		</div><!--#saturate-dialog-->
+		
+		<!----- HUE DIALOG BOX ----->
+		<div id="hue-dialog" class="dialog">
+			<h2>Hue</h2>
+			<p class="box-description">Change color hue</p>
+			<div id="hue-slider" class="slider"></div>
+				<p class="note">Current value: <span id="hueValue">0</span></p>
+				<button id="hue-ok" class="dialog-ok">Ok</button>
+		</div><!--#hue-dialog-->
+		
+		
+		<!--****************** FILTERS ******************-->
+		<!----- BLUR DIALOG BOX ----->
+		<div id="blur-dialog" class="dialog">
+			<h2>Blur</h2>
+			<p class="box-description">Adds blur to the image</p>
+			<div id="blur-slider" class="slider"></div>
+				<p class="note">Current value: <span id="blurValue">0</span></p>
+				<button id="blur-ok" class="dialog-ok">Ok</button>
+		</div><!--#blur-dialog-->
+		
+		<!----- BLACKWHITE DIALOG BOX ----->
+		<div id="bw-dialog" class="dialog">
+			<h2>Black and white</h2>
+			<p class="box-description">Removes color</p>
+			<div id="bw-slider" class="slider"></div>
+				<p class="note">Current value: <span id="bwValue">0</span></p>
+				<button id="bw-ok" class="dialog-ok">Ok</button>
+		</div><!--#bw-dialog-->
+		
+		<!----- SEPIA DIALOG BOX ----->
+		<div id="sepia-dialog" class="dialog">
+			<h2>Sepia</h2>
+			<p class="box-description">Old time sepia-effect</p>
+			<div id="sepia-slider" class="slider"></div>
+				<p class="note">Current value: <span id="sepiaValue">0</span></p>
+				<button id="sepia-ok" class="dialog-ok">Ok</button>
+		</div><!--#sepia-dialog-->
+		
+		<!----- INVERT DIALOG BOX ----->
+		<div id="invert-dialog" class="dialog">
+			<h2>Invert</h2>
+			<p class="box-description">Inverts the colors</p>
+			<div id="invert-slider" class="slider"></div>
+				<p class="note">Current value: <span id="invertValue">0</span></p>
+				<button id="invert-ok" class="dialog-ok">Ok</button>
+		</div><!--#invert-dialog-->
+		
+		
+		<!--****************** HELP ******************-->
+		<!----- ABOUT DIALOG BOX ----->
+		<div id="about-dialog" class="dialog">
+			<h2>About</h2>
+			<p class="box-description">BildEdit ver. 0.012 alpha</p>
+				<button id="about-close" class="dialog-ok">Close</button>
+		
+		<script src="bildedit.js"></script>		
+	</body>
+</html>
+
