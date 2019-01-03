@@ -29,7 +29,6 @@ $("#file").on("change", function(e) {
 	
 	let backgroundimage = ("url(" + path + ")");
 	$("#image-box").css("background-image", backgroundimage);
-	console.log(path);
 });
 
 /*--- Save file ---*/
@@ -178,14 +177,18 @@ $("#sepia-dialog").draggable();
 /*-------------------------------------*/
 
 /*--- Invert ---*/
-const invertValue = $('#invertValue');
+const invertCheck = $('#invert-check');
 const invertRegex = /invert(.*?)(\s|(?="))/;
 const invertUnit = ["invert", "%", 0, 0, 0, 100, 0]; //filtername, units, operator, factor, min, max, present
 
 $("#invert").click(function() {
 	closeBoxes();
 	$("#invert-dialog").css("display", "block");
-	slider("#invert-slider", invertValue, invertRegex, invertUnit);
+});
+
+$("#invert-check").change(function() {
+	console.log("Checkbox activated");
+	checkbox(invertCheck, invertRegex, invertUnit);
 });
 
 $("#invert-ok").click(function() {
@@ -211,6 +214,17 @@ $("#about-close").click(function() {
 $("#about-dialog").draggable();
 /*-------------------------------------*/
 
+/********** CHECKBOX FUNCTION **********/
+function checkbox(check, regex, unit) {
+	if (document.getElementById("invert-check").checked) {
+		if (filter.search(regex) == -1) {filter += unit[0] + "(" + unit[1] + ") ";}
+		filter = filter.replace(regex, unit[0] + "(100" + unit[1] + ") ");
+		$("img").css("filter", filter);
+	} else {
+		filter = filter.replace(regex, unit[0] + "(0" + unit[1] + ") ");
+		$("img").css("filter", filter);
+	}
+}
 
 /********** SLIDER FUNCTION **********/
 function slider(element, value, regex, unit) {
@@ -257,17 +271,17 @@ function download() {
 	canvas.height = canImage.height;
 	ctx.filter = filter;
 	ctx.drawImage(canImage, 0, 0);
+	/*----------*/
 
-	//let filetype = file.match(/[^(:)]+(?=;)/)[0];
-	let sFile = canvas.toDataURL();
-
-	
-	let downloadFile = document.createElement('a');
-	downloadFile.href = sFile;
-	let fileType = filename.match(/.*\.(.*?)$/)[1];
-	console.log(fileType);
-	downloadFile.download = (filename.replace(fileType, "png"));
-	downloadFile.click();
+	canvas.toBlob((image) => {
+		let file = new File([image], "Bilde.png")
+		let imageUrl = URL.createObjectURL(image);
+		let downloadFile = document.createElement('a');
+		downloadFile.href = imageUrl;
+		let fileType = filename.match(/.*\.(.*?)$/)[1];
+		downloadFile.download = (filename.replace(fileType, "png"));
+		downloadFile.click();
+	})	
 }
 
 let zoom = 1;
@@ -281,3 +295,4 @@ $("body").keydown(function(e) {
 	  $("#image-box").css("zoom", zoom);
   }
 });
+
